@@ -1,8 +1,13 @@
-def step(pos, dir):
-    return (pos[0] + dir[0], pos[1]+dir[1])
-
-def turn(dir):
+def turn(dir, left=False): ## defaults to right turn
+    if left:
+        return (-dir[1], dir[0])
     return (dir[1], -dir[0])
+
+def left(dir):
+    return turn(dir, left=True)
+
+def right(dir):
+    return turn(dir)
 
 def in_grid(grid, pos):
     return pos[0] >= 0 and pos[0] < len(grid) and pos[1] >= 0 and pos[1] < len(grid[pos[0]])
@@ -40,3 +45,22 @@ def div(vec, scalar):
 
 def rmap(mapping: dict):
     return {y: x for x, y in mapping.items()}
+
+def print_grid(grid):
+    for line in grid:
+        line_str = ""
+        for token in line:
+            line_str += str(token)
+        print(line_str)
+
+def get_dir_map():
+    return {"<": (-1, 0), ">":(1,0), "^": (0,1), "v": (0,-1)}
+
+def gat(grid, pos): ## short for grid-at, grid is in y, x order
+    return grid[pos[1]][pos[0]]
+
+def step(pos, dir):
+    dir_map = get_dir_map()
+    if dir in dir_map:
+        dir = dir_map[dir]
+    return (pos[0] + dir[0], pos[1]+dir[1])
