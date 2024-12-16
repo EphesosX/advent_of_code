@@ -4,7 +4,11 @@ import tqdm
 import sys
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.dirname(SCRIPT_DIR))
-from utils import *
+from utils import step, get_neighbors, turn
+
+def in_grid(grid, pos):
+    return pos[0] >= 0 and pos[0] < len(grid) and pos[1] >= 0 and pos[1] < len(grid[pos[0]])
+
 
 basepath = os.path.dirname(os.path.abspath(__file__))
 

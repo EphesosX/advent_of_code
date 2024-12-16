@@ -10,7 +10,7 @@ def right(dir):
     return turn(dir)
 
 def in_grid(grid, pos):
-    return pos[0] >= 0 and pos[0] < len(grid) and pos[1] >= 0 and pos[1] < len(grid[pos[0]])
+    return pos[1] >= 0 and pos[1] < len(grid) and pos[0] >= 0 and pos[0] < len(grid[pos[1]])
 
 def get_neighbors(grid, pos, allow_empty=False):
     nbrs = []
