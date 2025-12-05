@@ -15,12 +15,16 @@ def right(dir) -> Tuple[int]:
 def in_grid(grid: List[List[Any]], pos) -> bool:
     return pos[1] >= 0 and pos[1] < len(grid) and pos[0] >= 0 and pos[0] < len(grid[pos[1]])
 
-def get_neighbors(grid: List[List[Any]], pos, allow_empty=False):
+def get_neighbors(grid: List[List[Any]], pos, allow_empty=False, diag=False):
     nbrs = []
     i, j = pos
     for nbr in [(i-1,j),(i+1,j),(i,j-1),(i,j+1)]:
         if allow_empty or in_grid(grid, nbr):
             nbrs.append(nbr)
+    if diag:
+        for nbr in [(i-1,j-1),(i+1,j-1),(i+1,j-1),(i+1,j+1)]:
+            if allow_empty or in_grid(grid, nbr):
+                nbrs.append(nbr)
     return nbrs
 
 def gridrange(grid: List[List[Any]]):
@@ -61,6 +65,9 @@ def get_dir_map():
 
 def gat(grid: List[List[Any]], pos): ## short for grid-at, grid is in y, x order
     return grid[pos[1]][pos[0]]
+
+def gset(grid: List[List[Any]], pos, val): ## short for grid-set, grid is in y, x order
+    grid[pos[1]][pos[0]] = val
 
 def step(pos, dir) -> Tuple[Any]:
     dir_map = get_dir_map()
