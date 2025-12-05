@@ -102,3 +102,13 @@ def dist2(pos, pos2):
 
 def dist(pos, pos2) -> float:
     return math.sqrt(dist2(pos, pos2))
+
+def overlap(r1, r2): # checks if two ranges overlap
+    if r1[0] <= r2[0] and r1[1] >= r2[0]:
+        return True
+    if r1[0] > r2[0] and r1[0] <= r2[1]:
+        return True
+    return False
+
+def merge_ranges(r1, r2):
+    return (min(r1[0], r2[0]), max(r1[1], r2[1]))
